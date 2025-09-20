@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://www.eclipse.org/mat/report.xsd"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.eclipse.org/mat/report.xsd platform:/resource/org.eclipse.mat.report/schema/report.xsd"
+         name="GroupByJob">
+
+  <query name="Group_By_Job_Object">
+    <command>oql SELECT r.job AS jobObj, COUNT(r) AS runCount, SUM(retainedHeapSize(r)) AS retainedSize FROM org.jenkinsci.plugins.workflow.job.WorkflowRun r GROUP BY r.job ORDER BY runCount DESC</command>
+  </query>
+
+</section>
+
