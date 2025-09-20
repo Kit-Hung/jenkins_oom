@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://www.eclipse.org/mat/report.xsd"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.eclipse.org/mat/report.xsd platform:/resource/org.eclipse.mat.report/schema/report.xsd"
+         name="InspectJob">
+
+  <query name="Inspect_Specific_Job">
+    <!-- 把 0x12345678 替换为你在上一步看到的对象地址（注意去掉前导0x视情况而定） -->
+    <command>oql SELECT * FROM object(0x12345678)</command>
+  </query>
+
+</section>
+
