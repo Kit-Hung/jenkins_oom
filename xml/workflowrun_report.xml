@@ -4,12 +4,8 @@
          xsi:schemaLocation="http://www.eclipse.org/mat/report.xsd platform:/resource/org.eclipse.mat.report/schema/report.xsd"
          name="WorkflowRun by Job">
 
-  <!-- 可选：把输出拆成单文件（html）或 csv 之类，这里我们简单执行一个 OQL 查询 -->
   <query name="WorkflowRun_By_Job_Counts_and_Retained">
-    <!-- command 文本：以 "oql " 开头，后面跟 OQL 语句（注意这里不需要额外的双引号） -->
-    <command>
-oql SELECT r.job.displayName AS jobName, COUNT(r) AS runCount, SUM(retainedHeapSize(r)) AS retainedSize FROM org.jenkinsci.plugins.workflow.job.WorkflowRun r GROUP BY r.job.displayName ORDER BY runCount DESC
-    </command>
+    <command>oql SELECT toString(r.job) AS jobName, COUNT(r) AS runCount, SUM(retainedHeapSize(r)) AS retainedSize FROM org.jenkinsci.plugins.workflow.job.WorkflowRun r GROUP BY toString(r.job) ORDER BY runCount DESC</command>
   </query>
 
 </section>
