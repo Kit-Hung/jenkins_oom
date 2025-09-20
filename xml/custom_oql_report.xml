@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report>
+    <name>Custom OQL Query Report</name>
+    <description>Execute a specific OQL query and output results.</description>
+    <queries>
+        <query name="sample-oql-query">
+            <oql><![CDATA[
+SELECT o.toString() FROM java.lang.Object o WHERE o.@retainedHeapSize > 1000000
+            ]]></oql>
+            <!-- 你可以指定输出格式，例如 CSV -->
+            <output mode="csv" file="oql_results.csv"/>
+        </query>
+    </queries>
+</report>
