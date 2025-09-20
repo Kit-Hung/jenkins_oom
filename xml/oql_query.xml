@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://www.eclipse.org/mat/report.xsd"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.eclipse.org/mat/report.xsd platform:/resource/org.eclipse.mat.report/schema/report.xsd"
+         name="OQLQueryReport">
+    
+    <name>OQL Query Execution Report</name>
+    <description>Execute OQL query and output results</description>
+    
+    <queries>
+        <query name="oql-query">
+            <oql><![CDATA[
+SELECT o.toString() 
+FROM java.lang.Object o 
+WHERE o.@retainedHeapSize > 1000000
+            ]]></oql>
+            <output mode="csv" file="oql_results.csv"/>
+        </query>
+    </queries>
+    
+</section>
