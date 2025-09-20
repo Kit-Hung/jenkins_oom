@@ -19,3 +19,4 @@ WHERE o.@retainedHeapSize > 1000000
     </queries>
     
 </section>
+
