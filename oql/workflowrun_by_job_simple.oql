@@ -1,0 +1,9 @@
+SELECT {
+    job: r.job,
+    jobName: r.job.fullDisplayName,
+    runNumber: r.number,
+    retainedSize: retainedHeapSize(r)
+}
+FROM org.jenkinsci.plugins.workflow.job.WorkflowRun r
+WHERE r.job != null
+LIMIT 2000
