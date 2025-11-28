@@ -1,0 +1,51 @@
+flowchart LR
+    subgraph JenkinsController[ Jenkins Controller ]
+        JQ[Build Queue]
+        JMS[Master/Controller]
+    end
+
+
+    subgraph Clouds[Clouds]
+        EKS["EKS Cloud (k8s plugin)<br/>Pod Templates"]
+        AnkaCloud["Anka Cloud<br/>Templates & Labels"]
+        EC2["EC2 Fleet / ASG<br/>EC2 Templates"]
+    end
+
+
+    subgraph AnkaController[Anka Controller Cluster]
+        AnkaAPI(Anka API)
+        AnkaSched(Anka Scheduler)
+        Hosts[Mac Hosts Pool]
+    end
+
+
+    subgraph AWS[AWS Infra]
+        VPC(VPC)
+        Subnet(Subnet)
+        ASG(ASG / Fleet)
+        EKSNodes[EKS Worker Nodes]
+    end
+
+
+    JQ -->|job with label| JMS
+    JMS -->|label match: eks| EKS
+    JMS -->|label match: generic| EC2
+    JMS -->|label match: xcode / mac| AnkaCloud
+
+
+    AnkaCloud -->|request VM| AnkaAPI
+    AnkaAPI --> AnkaSched
+    AnkaSched -->|select host by tags/capacity| Hosts
+    Hosts -->|start VM| AnkaAPI
+    AnkaAPI -->|register agent| JMS
+
+
+    EC2 -->|launch instance via AWS APIs| ASG
+    ASG -->|ip/ssh| JMS
+    EKS -->|create Pod via k8s API| EKSNodes
+
+
+    EKSNodes --> AWS
+    ASG --> AWS
+    Hosts --> AWS
+    JMS --> VPC
